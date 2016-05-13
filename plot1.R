@@ -12,6 +12,7 @@ energy <- fread("C:\\Users\\Renato\\Desktop\\power_cons\\household_power_consump
 energy_sel <- filter(energy, dmy(Date) == '2007-02-01' | dmy(Date) == '2007-02-02')
 
 # generate de histogram
+par(mfrow = c(1,1))
 hist(energy_sel$Global_active_power, col = "red",
      xlab = "Global Active Power (kilowatts)", 
      main = "Global Active Power")

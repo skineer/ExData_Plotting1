@@ -14,9 +14,14 @@ energy_sel <- filter(energy, dmy(Date) == '2007-02-01' | dmy(Date) == '2007-02-0
 # generate plot
 # weekdays in brazilian portuguese 
 # equivalent to thu, fri, sat)
+png(file = "plot3.png")
 par(mfrow = c(1,1))
-plot(dmy_hms(paste(energy_sel$Date, energy_sel$Time)), 
-     energy_sel$Global_active_power, 
-     type = "l", ylab = "Global Active Power (kilowatts)", xlab = "")
-dev.copy(png, file = "plot2.png")
+with(energy_sel, plot(dmy_hms(paste(Date, Time)), 
+                      Sub_metering_1, type = 'l', col = "black",
+                      xlab = "", ylab = "Energy sub metering"))
+with(energy_sel, lines(dmy_hms(paste(Date, Time)), Sub_metering_2, col = "red"))
+with(energy_sel, lines(dmy_hms(paste(Date, Time)), Sub_metering_3, col = "blue"))
+legend("topright", 
+       legend = c("Sub_metering_1  ", "Sub_metering_2  ", "Sub_metering_3  "),
+       col = c("black","red","blue"), lty = 1, lwd = 1)
 dev.off()
